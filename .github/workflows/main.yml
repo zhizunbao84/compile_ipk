@@ -10,6 +10,7 @@ jobs:
         - name: download openwrt sdk
           run: |
             cd ~
+            mkdir myipk
             mkdir openwrt-sdk-23.05.2
             wget https://archive.openwrt.org/releases/23.05.2/targets/ramips/mt7620/openwrt-sdk-23.05.2-ramips-mt7620_gcc-12.3.0_musl.Linux-x86_64.tar.xz
             tar xf openwrt-sdk-23.05.2-ramips-mt7620_gcc-12.3.0_musl.Linux-x86_64.tar.xz -C openwrt-sdk-23.05.2
@@ -35,10 +36,10 @@ jobs:
             # 先回退到SDK主目录
             cd ../..
             make package/luci-app-openclash/luci-app-openclash/compile V=99
-            mkdir -p ./artifact/package
+            
         
         - name: Upload ipk
           uses: actions/upload-artifact@v3
           with:
             name: luci-app-openclash
-            path: ./artifact/package/
+            path: ~/myipk
