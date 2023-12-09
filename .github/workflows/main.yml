@@ -31,6 +31,7 @@ jobs:
         - name: clone openclash
           run: |
             ls -al
+            cd openwrt-sdk-23.05.2
             mkdir package/luci-app-openclash
             cd package/luci-app-openclash
             git init
