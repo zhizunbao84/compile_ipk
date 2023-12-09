@@ -17,6 +17,7 @@ jobs:
         - name: download openwrt sdk
           run: |
             mkdir ./mywork
+            cd ./mywork
             wget https://archive.openwrt.org/releases/23.05.2/targets/ramips/mt7620/openwrt-sdk-23.05.2-ramips-mt7620_gcc-12.3.0_musl.Linux-x86_64.tar.xz
             # tar xf openwrt-sdk-23.05.2-ramips-mt7620_gcc-12.3.0_musl.Linux-x86_64.tar.xz -C openwrt-sdk-23.05.2
             tar xf openwrt-sdk-23.05.2-ramips-mt7620_gcc-12.3.0_musl.Linux-x86_64.tar.xz
