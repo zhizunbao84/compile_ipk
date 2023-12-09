@@ -6,6 +6,12 @@ jobs:
     steps:
         - name: Checkout repository
           uses: actions/checkout@v3
+
+        - name: download openwrt sdk
+          run: |
+            sudo apt install build-essential clang flex bison g++ gawk \
+            gcc-multilib g++-multilib gettext git libncurses-dev libssl-dev \
+            python3-distutils rsync unzip zlib1g-dev file wget
         
         - name: download openwrt sdk
           run: |
@@ -16,6 +22,8 @@ jobs:
             tar xf openwrt-sdk-23.05.2-ramips-mt7620_gcc-12.3.0_musl.Linux-x86_64.tar.xz
             mv openwrt-sdk-23.05.2-ramips-mt7620_gcc-12.3.0_musl.Linux-x86_64 openwrt-sdk-23.05.2
             cd openwrt-sdk-23.05.2
+            ls -l .config
+            cat .config
 
         - name: clone openclash
           run: |
@@ -36,7 +44,7 @@ jobs:
             # 开始编译
             # 先回退到SDK主目录
             cd ../..
-            make package/feeds/luci/luci-base/compile V=s
+            # make package/feeds/luci/luci-base/compile V=s
             make package/luci-app-openclash/luci-app-openclash/compile V=99
             cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/myipk/
           working-directory: ./artifact/openwrt-sdk-23.05.2
