@@ -29,6 +29,7 @@ jobs:
 
         - name: clone openclash
           run: |
+            ls -al
             mkdir package/luci-app-openclash
             cd package/luci-app-openclash
             git init
