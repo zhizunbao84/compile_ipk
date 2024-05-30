@@ -24,7 +24,7 @@ jobs:
       UPLOAD_NAME: ${{ github.event.inputs.UPLOAD_NAME }}
 
       # 固定值
-      JM_DOWNLOAD_DIR: /home/runner/work/jmcomic/download/
+      JM_DOWNLOAD_DIR: /home/runner/work/compile_ipk/compile_ipk/333/
 
     steps:
       - name: step one
@@ -34,7 +34,8 @@ jobs:
 
       - name: zip files
         run: |
-          echo `pwd`  
+          echo `pwd`
+          mkdir 333
           cd $JM_DOWNLOAD_DIR
           echo "hello world" > 222.txt
           tar -zcvf "../$ZIP_NAME" ./
