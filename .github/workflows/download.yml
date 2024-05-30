@@ -1,0 +1,49 @@
+name: download articles
+
+on:
+  workflow_dispatch:
+    inputs:
+      ZIP_NAME:
+        type: string
+        default: test.tar.gz
+        description: 压缩文件名称
+        required: false
+
+      UPLOAD_NAME:
+        type: string
+        default: Click me to download
+        description: 上传文件名称
+        required: false
+
+jobs:
+  crawler:
+    runs-on: ubuntu-latest
+    env:
+      # 工作流输入
+      ZIP_NAME: ${{ github.event.inputs.ZIP_NAME }}
+      UPLOAD_NAME: ${{ github.event.inputs.UPLOAD_NAME }}
+
+      # 固定值
+      JM_DOWNLOAD_DIR: /home/runner/work/jmcomic/download/
+
+    steps:
+      - name: step one
+        run: |
+          echo $JM_DOWNLOAD_DIRf
+          echo `pwd`
+
+      - name: zip files
+        run: |
+          echo `pwd`  
+          cd $JM_DOWNLOAD_DIR
+          echo "hello world" > 222.txt
+          tar -zcvf "../$ZIP_NAME" ./
+          mv "../$ZIP_NAME" .
+
+      - name: upload file
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.UPLOAD_NAME }}
+          path: ${{ env.JM_DOWNLOAD_DIR }}/${{ env.ZIP_NAME }}
+          if-no-files-found: error
+          retention-days: 90
